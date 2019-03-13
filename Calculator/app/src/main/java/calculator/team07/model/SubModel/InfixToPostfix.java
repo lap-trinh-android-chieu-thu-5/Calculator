@@ -4,48 +4,48 @@ import java.util.Arrays;
 import java.util.Stack;
 
 public class InfixToPostfix {
-    boolean check_error = false;  // kiem tra ky tu dau tien la am hay duong, kiem tra loi
+    boolean check_error = false;  //check first character + - and check error
 
-    public String standardizeDouble(double num){ //chuan hoa so
+    public String standardizeDouble(double num){ //standardized number
         int a = (int)num;
         if (a == num)
             return Integer.toString(a);
         else return Double.toString(num);
     }
 
-    public boolean isCharPi(char c){ //kiem tra ky tu c la Pi hay khong
+    public boolean isCharPi(char c){ //check character is π
         if (c == 'π') return true;
         else return false;
     }
 
-    public boolean isNumPi(double num){ //kiem tra so num la Pi hay khong
+    public boolean isNumPi(double num){ //check number is π
         if (num == Math.PI) return true;
         else return false;
     }
 
-    public boolean isNum(char c){	//kiem tra ky tu c co la so khong (pi cung la so)
+    public boolean isNum(char c){	//check character is num(pi is num)
         if (Character.isDigit(c) || isCharPi(c)) return true;
         else return false;
     }
 
-    public String NumToString(double num){ //chuyen so sang chuoi
+    public String NumToString(double num){ //convert num to string
         if (isNumPi(num)) return "π";
         else return standardizeDouble(num);
     }
 
-    public double StringToNum(String s){ 	//Chuoi sang so
+    public double StringToNum(String s){ 	//convert string to num
         if (isCharPi(s.charAt(0))) return Math.PI;
         else return Double.parseDouble(s);
     }
 
-    public boolean isOperator(char c){ 	// kiem tra xem co phai toan tu
+    public boolean isOperator(char c){ 	// check is operator
         char operator[] = { '+', '-', '*', '/', '^', '~', 's', 'c', 't', '@', '!', '%', ')', '('}; //~ thay cho dau am (-)
         Arrays.sort(operator);
         if (Arrays.binarySearch(operator, c) > -1)
             return true;
         else return false;
     }
-    public int priority(char c){		// thiet lap thu tu uu tien
+    public int priority(char c){ // setup priority
         switch (c) {
             case '+' : case '-' : return 1;
             case '*' : case '/' : return 2;
@@ -56,42 +56,42 @@ public class InfixToPostfix {
         return 0;
     }
 
-    public boolean isOneMath(char c){ 	// kiem tra toan tu 1 ngoi
-        char operator[] = { 's', 'c', 't', '@', '('}; //~ thay cho dau am (-)
+    public boolean isOneMath(char c){ 	// check operator 1
+        char operator[] = { 's', 'c', 't', '@', '('}; //~ replace - (-)
         Arrays.sort(operator);
         if (Arrays.binarySearch(operator, c) > -1)
             return true;
         else return false;
     }
 
-    public String standardize(String s){ //chuan hoa bieu thuc
+    public String standardize(String s){ //standardized expression
         String s1 = "";
         s = s.trim();
-        s = s.replaceAll("\\s+"," "); //	chuan hoa s
+        s = s.replaceAll("\\s+"," "); //	standardized s
         int open = 0, close = 0;
         for (int i=0; i<s.length(); i++){
             char c = s.charAt(i);
             if (c == '(') open++;
             if (c == ')') close++;
         }
-        for (int i=0; i< (open - close); i++) // them cac dau ")" vao cuoi neu thieu
+        for (int i=0; i< (open - close); i++) // add ")" in last if lost
             s += ')';
         for (int i=0; i<s.length(); i++){
-            if (i>0 && isOneMath(s.charAt(i)) && (s.charAt(i-1) == ')' || isNum(s.charAt(i-1)))) s1 = s1 + "*"; //	chuyen ...)(... thanh ...)*(...
+            if (i>0 && isOneMath(s.charAt(i)) && (s.charAt(i-1) == ')' || isNum(s.charAt(i-1)))) s1 = s1 + "*"; //	convert ...)(... to ...)*(...
             if ((i == 0 || (i>0 && !isNum(s.charAt(i-1)))) && s.charAt(i) == '-' && isNum(s.charAt(i+1))) {
-                s1 = s1 + "~"; // check so am
+                s1 = s1 + "~"; // check number (-)
             }
         	/*else if ((i == 0 || (i>0 && !isNum(s.charAt(i-1)))) && s.charAt(i) == '+' && isNum(s.charAt(i+1))) {
-        		s1 = s1 + ""; // check dau +
+        		s1 = s1 + ""; // check +
         	}*/
             else if (i>0 && (isNum(s.charAt(i-1)) || s.charAt(i-1) == ')') && isCharPi(s.charAt(i))) s1 = s1 + "*" + s.charAt(i);
-                // VD hoac 6π , ...)π chuyen sang 6*π , ...)*π
+                // ex : convert 6π , ...)π to 6*π , ...)*π
             else s1 = s1 + s.charAt(i);
         }
         return s1;
     }
 
-    public String[] processString(String sMath){ // xu ly bieu thuc nhap vao thanh cac phan tu
+    public String[] processString(String sMath){ // handle expression to parts
         String s1 = "", elementMath[] = null;
         sMath = standardize(sMath);
         InfixToPostfix  ITP = new InfixToPostfix();
@@ -107,8 +107,8 @@ public class InfixToPostfix {
             else s1 = s1 + " " + c + " ";
         }
         s1 = s1.trim();
-        s1 = s1.replaceAll("\\s+"," "); //	chuan hoa s1
-        elementMath = s1.split(" "); //tach s1 thanh cac phan tu
+        s1 = s1.replaceAll("\\s+"," "); //	standardized  s1
+        elementMath = s1.split(" "); //divide s1 to parts
         return elementMath;
     }
 
@@ -152,10 +152,10 @@ public class InfixToPostfix {
         double num = 0.0;
         for (int i=0; i<elementMath.length; i++){
             char c = elementMath[i].charAt(0);
-            if (isCharPi(c)) S.push(Math.PI);	// neu la pi
+            if (isCharPi(c)) S.push(Math.PI);	// if pi
             else{
-                if (!ITP.isOperator(c)) S.push(Double.parseDouble(elementMath[i])); //so
-                else{	// toan tu
+                if (!ITP.isOperator(c)) S.push(Double.parseDouble(elementMath[i])); //num
+                else{	// operator
 
                     double num1 = S.pop();
                     switch (c) {
