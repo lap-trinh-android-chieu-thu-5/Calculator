@@ -2,19 +2,33 @@ package calculator.team07.model.SubModel;
 
 public final class CalculatorHandle {
 
-    private  static  InfixToPostfix sInfixToPostfix = new InfixToPostfix();
-    private  static  String textAns = "";
-    private  static  String textMath = "";
-    private  static  String screenTextMath = "";
+    private static InfixToPostfix sInfixToPostfix = new InfixToPostfix();
+    public static String textAns = "";
+    public static String textMath = "";
+    public static String screenTextMath = "";
+    public static int checkSubmit = 0;
 
-    public static String Caculate(String elementMath[], String expression){
-        if (!sInfixToPostfix.check_error) elementMath = sInfixToPostfix.processString(expression);		//	tach bieu thuc thanh cac phan tu
-        if (!sInfixToPostfix.check_error) elementMath = sInfixToPostfix.postfix(elementMath);		// 	dua cac phan tu ve dang postfix
-        if (!sInfixToPostfix.check_error) textAns = sInfixToPostfix.valueMath(elementMath);		//lay gia tri
-        textMath = textAns;
-        screenTextMath = textAns;
+    public static String Caculate(String elementMath[]) {
+        if(textMath.length() > 0)
+        {
+                if (!sInfixToPostfix.check_error) {
+                    elementMath = sInfixToPostfix.processString(textMath);        //	separacte expression
+                }
+                if (!sInfixToPostfix.check_error) {
+                    elementMath = sInfixToPostfix.postfix(elementMath);        // 	convert expression to postfix
+                }
+                if (!sInfixToPostfix.check_error) {
+                    textAns = sInfixToPostfix.valueMath(elementMath);        //get result
+                }
+                checkSubmit = 1;
+                textMath = textAns;
+                screenTextMath = textAns;
+        }
 
-        return  textAns;
+        if(sInfixToPostfix.check_error){
+            return "Math Error !";
+        }
+        return textAns;
     }
 
 }
