@@ -6,46 +6,55 @@ import java.util.Stack;
 public class InfixToPostfix {
     boolean check_error = false;  //check first character + - and check error
 
-    public String standardizeDouble(double num){ //standardized number
+    //standardized number
+    public String standardizeDouble(double num){
         int a = (int)num;
         if (a == num)
             return Integer.toString(a);
         else return Double.toString(num);
     }
 
-    public boolean isCharPi(char c){ //check character is π
+    //check character is π
+    public boolean isCharPi(char c){
         if (c == 'π') return true;
         else return false;
     }
 
-    public boolean isNumPi(double num){ //check number is π
+    //check number is π
+    public boolean isNumPi(double num){
         if (num == Math.PI) return true;
         else return false;
     }
 
-    public boolean isNum(char c){	//check character is num(pi is num)
+    //check character is num(pi is num)
+    public boolean isNum(char c){
         if (Character.isDigit(c) || isCharPi(c)) return true;
         else return false;
     }
 
-    public String NumToString(double num){ //convert num to string
+    //convert num to string
+    public String NumToString(double num){
         if (isNumPi(num)) return "π";
         else return standardizeDouble(num);
     }
 
-    public double StringToNum(String s){ 	//convert string to num
+    //convert string to num
+    public double StringToNum(String s){
         if (isCharPi(s.charAt(0))) return Math.PI;
         else return Double.parseDouble(s);
     }
 
-    public boolean isOperator(char c){ 	// check is operator
+    // check is operator
+    public boolean isOperator(char c){
         char operator[] = { '+', '-', '*', '/', '^', '~', 's', 'c', 't', '@', '!', '%', ')', '('}; //~ thay cho dau am (-)
         Arrays.sort(operator);
         if (Arrays.binarySearch(operator, c) > -1)
             return true;
         else return false;
     }
-    public int priority(char c){ // setup priority
+
+    // setup priority
+    public int priority(char c){
         switch (c) {
             case '+' : case '-' : return 1;
             case '*' : case '/' : return 2;
@@ -56,7 +65,8 @@ public class InfixToPostfix {
         return 0;
     }
 
-    public boolean isOneMath(char c){ 	// check operator 1
+    // check operator 1
+    public boolean isOneMath(char c){
         char operator[] = { 's', 'c', 't', '@', '('}; //~ replace - (-)
         Arrays.sort(operator);
         if (Arrays.binarySearch(operator, c) > -1)
@@ -64,7 +74,8 @@ public class InfixToPostfix {
         else return false;
     }
 
-    public String standardize(String s){ //standardized expression
+    //standardized expression
+    public String standardize(String s){
         String s1 = "";
         s = s.trim();
         s = s.replaceAll("\\s+"," "); //	standardized s
@@ -91,7 +102,8 @@ public class InfixToPostfix {
         return s1;
     }
 
-    public String[] processString(String sMath){ // handle expression to parts
+    // handle expression to parts
+    public String[] processString(String sMath){
         String s1 = "", elementMath[] = null;
         sMath = standardize(sMath);
         InfixToPostfix  ITP = new InfixToPostfix();
@@ -112,6 +124,7 @@ public class InfixToPostfix {
         return elementMath;
     }
 
+    //convert
     public String[] postfix(String[] elementMath){
         InfixToPostfix  ITP = new InfixToPostfix();
         String s1 = "", E[];
