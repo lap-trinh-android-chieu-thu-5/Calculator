@@ -15,7 +15,7 @@ public class KeyExtendFragment extends Fragment implements View.OnClickListener 
 
     private  IKeyClickListener mIkeyClickListener;
     private Button mBtnAc, mBtnDel, mBtnSin, mBtnCos, mBtnTan, mBtnFactorial, mBtnPow, mBtnSqrt,
-            mBtnPercent, mBtnPi, mBtnMainKey, mBtnSubmit;
+            mBtnPercent, mBtnPi, mBtnMainKey, mBtnSubmit, mBtnInverse;
 
     public KeyExtendFragment() {
     }
@@ -48,7 +48,7 @@ public class KeyExtendFragment extends Fragment implements View.OnClickListener 
         mBtnSqrt = (Button) view.findViewById(R.id.btn_sqrt);
         mBtnSqrt.setOnClickListener(this);
 
-        mBtnPercent = (Button) view.findViewById(R.id.percent);
+        mBtnPercent = (Button) view.findViewById(R.id.btn_percent);
         mBtnPercent.setOnClickListener(this);
 
         mBtnPi = (Button) view.findViewById(R.id.btn_pi);
@@ -60,6 +60,9 @@ public class KeyExtendFragment extends Fragment implements View.OnClickListener 
         mBtnSubmit = (Button) view.findViewById(R.id.btn_submit);
         mBtnSubmit.setOnClickListener(this);
 
+        mBtnInverse = (Button) view.findViewById(R.id.btn_inverse);
+        mBtnInverse.setOnClickListener(this);
+
         return view;
     }
 
@@ -67,6 +70,7 @@ public class KeyExtendFragment extends Fragment implements View.OnClickListener 
     public  void onAttach(Context context) {
         super.onAttach(context);
         mIkeyClickListener = (IKeyClickListener) context;
+        return;
     }
 
     @Override

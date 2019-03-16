@@ -10,20 +10,20 @@
         android:layout_height="match_parent"
         android:background="#05061A"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center_horizontal">
 
 
         <RelativeLayout
             android:layout_margin="2dp"
             android:gravity="center_vertical"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="240dp"
             android:orientation="vertical"
             android:weightSum="10"
-            android:ignoreGravity="@id/button_history">
+            android:ignoreGravity="@id/btn_history">
 
             <Button
-                android:id="@+id/button_history"
+                android:id="@+id/btn_history"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
@@ -37,7 +37,7 @@
                 android:background="#05061A"
                 android:textSize="30dp"
                 android:text="\u003C"
-                android:id="@+id/button_previous"
+                android:id="@+id/btn_previous"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -46,7 +46,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="240dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -55,23 +55,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:gravity="right"
-                android:text="1+2+3+4+5+1+2+3+4+5+1+2+3+4+5+1+2+3+4+5+"
+                android:text=""
                 android:textColor="#ffffff"
                 android:textSize="32dp" />
+
             <TextView
                 android:id="@+id/text_view_answer"
-                android:text="203020"
-                android:textColor="#FF7414"
-                android:textSize="45dp"
-                android:gravity="right"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginBottom="5dp"/>
+                android:gravity="right"
+                android:text=""
+                android:textColor="#FF7414"
+                android:textSize="45dp" />
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="240dp"
             android:gravity="center"
             android:orientation="vertical"
             android:weightSum="10">
@@ -80,7 +80,7 @@
                 android:background="#05061A"
                 android:text="\u003E"
                 android:textSize="30dp"
-                android:id="@+id/button_next"
+                android:id="@+id/btn_next"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>

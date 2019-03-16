@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import calculator.team07.R;
+import calculator.team07.model.Entity.Result;
 
 public class ExpressionFragment extends Fragment implements View.OnClickListener {
 
@@ -32,10 +33,10 @@ public class ExpressionFragment extends Fragment implements View.OnClickListener
         mTvAnswer = view.findViewById(R.id.text_view_answer);
         mTvExpression = view.findViewById(R.id.text_view_expression);
 
-        mBtnPrevious = view.findViewById(R.id.button_previous);
+        mBtnPrevious = view.findViewById(R.id.btn_previous);
         mBtnPrevious.setOnClickListener(this);
 
-        mBtnNext = view.findViewById(R.id.button_next);
+        mBtnNext = view.findViewById(R.id.btn_next);
         mBtnNext.setOnClickListener(this);
 
         return view;
@@ -52,4 +53,11 @@ public class ExpressionFragment extends Fragment implements View.OnClickListener
         int id = v.getId();
         mIkeyClickListener.onKeyClick(id);
     }
+    public  void setTextViewEpresion(String expression){
+        mTvExpression.setText(expression);
+    }
+    public void setTextViewAnswer(String textAns){
+       mTvAnswer.setText(textAns);
+    }
+
 }
