@@ -5,10 +5,112 @@
     android:layout_height="match_parent"
     tools:context=".fragment.KeyExtendFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <TableLayout
+        android:background="#6BA9FD"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:stretchColumns="*">
+
+        <TableRow>
+            <Button
+                android:id="@+id/btn_ac"
+                android:layout_margin="@dimen/button_margin_size"
+                android:textSize="@dimen/button_text_size"
+                android:background="@drawable/bg_button_affect"
+                android:textColor="#000000"
+                android:layout_span="2"
+                android:text="AC"/>
+
+            <Button
+                android:id="@+id/btn_del"
+                android:layout_margin="@dimen/button_margin_size"
+                android:layout_span="2"
+                android:background="@drawable/bg_button_affect"
+                android:text="DEL"
+                android:textColor="#000000"
+                android:textSize="@dimen/button_text_size" />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/btn_sin"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
+                android:text="Sin"
+                android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btn_cos"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
+                android:text="Cos"
+                android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btn_tan"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
+                android:text="Tan"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_factorial"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:text="!"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/button_text_size" />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/btn_pow"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
+                android:text="^"
+                android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btn_sqrt"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
+                android:text="√"/>
+            <Button
+                android:id="@+id/btn_percent"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
+                android:text="%"/>
+            <Button
+                android:id="@+id/btn_pi"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
+                android:text="π"
+                android:textAllCaps="false"/>
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/btn_main_key"
+                android:text="123..."
+                android:layout_span="2"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button"
+                android:textSize="@dimen/button_text_size"
+                android:textColor="#48B1D1" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_span="2"
+                android:layout_margin="@dimen/button_margin_size"
+                android:background="@drawable/bg_button_affect"
+                android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
+                android:text="="/>
+        </TableRow>
+    </TableLayout>
 
 </FrameLayout>

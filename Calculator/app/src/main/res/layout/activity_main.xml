@@ -4,13 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".view.MainActivity">
 
     <FrameLayout
+        android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height = "wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/top" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
+    <FrameLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 </LinearLayout>

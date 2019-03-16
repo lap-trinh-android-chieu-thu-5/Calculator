@@ -7,17 +7,49 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import calculator.team07.R;
 
-public class ExpressionFragment extends Fragment {
+public class ExpressionFragment extends Fragment implements View.OnClickListener {
+
+    private  IKeyClickListener mIkeyClickListener;
+    private TextView mTvAnswer;
+    private TextView mTvExpression;
+    private Button mBtnPrevious;
+    private  Button mBtnNext;
+
     public ExpressionFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_expression, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_expression, container, false);
+
+        mTvAnswer = view.findViewById(R.id.text_view_answer);
+        mTvExpression = view.findViewById(R.id.text_view_expression);
+
+        mBtnPrevious = view.findViewById(R.id.button_previous);
+        mBtnPrevious.setOnClickListener(this);
+
+        mBtnNext = view.findViewById(R.id.button_next);
+        mBtnNext.setOnClickListener(this);
+
+        return view;
     }
 
+    @Override
+    public  void onAttach(Context context) {
+        super.onAttach(context);
+        mIkeyClickListener = (IKeyClickListener) context;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        mIkeyClickListener.onKeyClick(id);
+    }
 }
