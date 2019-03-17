@@ -485,16 +485,6 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE ) {
             Result result = (Result) data.getSerializableExtra("feedback");
             //TODO set lai previous
-//            if (result!=null)
-//            {
-//                txtKetQua.setText(result.getKetQua());
-//                txtChuoi.setText(result.getChuoi());
-//            }
-//            else
-//            {
-//                txtKetQua.setText("ok");
-//                txtChuoi.setText("ok");
-//            }
         }
     }
 }

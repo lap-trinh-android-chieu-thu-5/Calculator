@@ -16,47 +16,41 @@ import calculator.team07.model.Entity.Result;
 
 public class CustomAdapter<puclic> extends ArrayAdapter<Result> {
 
-    private Context context;
-    private int resource;
-    private List<Result> objects;
-    private String tag = getClass().getSimpleName();
-    //nhan cac doi tuong de xac dinh view cha va
+    private Context mContext;
+    private int mResource;
+    private List<Result> mObjects;
+    private String mTag = getClass().getSimpleName();
+
     public CustomAdapter(Context context, int resource, List<Result> objects) {
         super(context, resource, objects);
-        this.context=context;
-        this.resource=resource;
-        this.objects=objects;
+        this.mContext = context;
+        this.mResource = resource;
+        this.mObjects = objects;
     }
 
     //
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        //khoi tao lan dau
         ViewHolder viewHolder;
-        if (convertView==null)
-        {
-            convertView = LayoutInflater.from(this.context).inflate(R.layout.row_item,parent,false);
-            viewHolder= new ViewHolder();
-            // xac dinh view de lay doi tuong
+        if (convertView == null) {
+            convertView = LayoutInflater.from(this.mContext).inflate(R.layout.row_item, parent, false);
+            viewHolder = new ViewHolder();
+
             viewHolder.mTvAnswer = (TextView) convertView.findViewById(R.id.text_view_expression);
-            viewHolder.mTvExpression = (TextView)convertView.findViewById(R.id.text_view_answer);
+            viewHolder.mTvExpression = (TextView) convertView.findViewById(R.id.text_view_answer);
             convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        else
-        {
-            viewHolder =(ViewHolder)convertView.getTag();
-        }
-        //Button btndelet =  (Button) convertView.findViewById(R.id.btn_delete);
-        //lay doi tuong theo position
-        Result result = this.objects.get(position);
+
+        Result result = this.mObjects.get(position);
         viewHolder.mTvExpression.setText(result.ScreenMath);
         viewHolder.mTvAnswer.setText(result.Answer);
         return convertView;
     }
-    //viewholder
-    public class ViewHolder
-    {
+
+    public class ViewHolder {
         private TextView mTvAnswer;
         private TextView mTvExpression;
     }

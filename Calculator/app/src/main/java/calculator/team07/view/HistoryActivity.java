@@ -21,89 +21,85 @@ import calculator.team07.model.SubModel.CalculatorHandle;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private List<Result> listResult;
-    private CustomAdapter customAdapter;
-    private ListView listView;
-    private int position=-9999;
-    private Result result;
-    private Button btnBack;
+    private List<Result> mListResult;
+    private CustomAdapter mCustomAdapter;
+    private ListView mListView;
+    private int mPosition = -9999;
+    private Result mResult;
+    private Button mBtnBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        listView = (ListView)findViewById(R.id.lv_list_result);
-        btnBack = (Button) findViewById(R.id.btn_back);
-        KhoiTao();
-        customAdapter = new CustomAdapter(HistoryActivity.this,R.layout.row_item,listResult);
-        listView.setAdapter(customAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView = (ListView) findViewById(R.id.lv_list_result);
+        mBtnBack = (Button) findViewById(R.id.btn_back);
+
+        initList();
+
+        mCustomAdapter = new CustomAdapter(HistoryActivity.this, R.layout.row_item, mListResult);
+        mListView.setAdapter(mCustomAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ShowCustomDialog(position);
             }
         });
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
     }
-    private void KhoiTao()
-    {
+
+    private void initList() {
         //TODO lay tam truc tiep, test xong thi xoa
-        listResult = CalculatorHandle.sLstAnswer;
+        mListResult = CalculatorHandle.sLstAnswer;
     }
 
     @Override
     public void finish() {
 
-        // Chuẩn bị dữ liệu Intent.
         Intent data = new Intent();
-        if (this.position!=-9999)
-        {
-            this.result = listResult.get(position);
-            this.position=-9999;
-
+        if (this.mPosition != -9999) {
+            this.mResult = mListResult.get(mPosition);
+            this.mPosition = -9999;
+        } else {
+            this.mResult = null;
         }
-        else
-        {
-            this.result=null;
-        }
-        data.putExtra("feedback", this.result);
+        data.putExtra("feedback", this.mResult);
         this.setResult(Activity.RESULT_OK, data);
         super.finish();
     }
 
-    public void ShowCustomDialog(final int position)
-    {
+    public void ShowCustomDialog(final int position) {
 
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.custom_dialog);
-        Button btnOk = (Button)dialog.findViewById(R.id.btn_accept);
-        Button btnNo = (Button)dialog.findViewById(R.id.btn_delete);
-        Button btnCancle = (Button)dialog.findViewById(R.id.btn_cancle);
-        btnOk.setOnClickListener(new View.OnClickListener() {
+
+        Button btnAccept = (Button) dialog.findViewById(R.id.btn_accept);
+        Button btnDelete = (Button) dialog.findViewById(R.id.btn_delete);
+        Button btnCancle = (Button) dialog.findViewById(R.id.btn_cancle);
+
+        btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HistoryActivity.this.position=position;
+                HistoryActivity.this.mPosition = position;
                 dialog.dismiss();
                 finish();
             }
         });
-        btnNo.setOnClickListener(new View.OnClickListener() {
+        btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listResult.size()>=1)
-                {
-                    HistoryActivity.this.position=position;
-                    Toast.makeText(HistoryActivity.this,"lay position"+String.valueOf(position),Toast.LENGTH_LONG).show();listResult.remove(position);
-                    customAdapter.notifyDataSetChanged();
-                    HistoryActivity.this.position=-9999;
-                }
-                else
-                {
-                    Toast.makeText(HistoryActivity.this,"ko con phan tu",Toast.LENGTH_LONG).show();
+                if (mListResult.size() >= 1) {
+                    HistoryActivity.this.mPosition = position;
+                    mListResult.remove(position);
+                    mCustomAdapter.notifyDataSetChanged();
+                    HistoryActivity.this.mPosition = -9999;
+                } else {
+                    Toast.makeText(HistoryActivity.this, "Không còn phần tử nào trong lịch sử !", Toast.LENGTH_LONG).show();
                 }
                 dialog.cancel();
             }
@@ -112,7 +108,7 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.cancel();
-                HistoryActivity.this.position=-9999;
+                HistoryActivity.this.mPosition = -9999;
             }
         });
         dialog.show();
