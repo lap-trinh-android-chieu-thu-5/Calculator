@@ -20,6 +20,7 @@ public class ExpressionFragment extends Fragment implements View.OnClickListener
     private TextView mTvExpression;
     private Button mBtnPrevious;
     private  Button mBtnNext;
+    private  Button mBtnHistory;
 
     public ExpressionFragment() {
     }
@@ -38,6 +39,9 @@ public class ExpressionFragment extends Fragment implements View.OnClickListener
 
         mBtnNext = view.findViewById(R.id.btn_next);
         mBtnNext.setOnClickListener(this);
+
+        mBtnHistory = view.findViewById(R.id.btn_history);
+        mBtnHistory.setOnClickListener(this);
 
         return view;
     }

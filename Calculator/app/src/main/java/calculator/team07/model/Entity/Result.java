@@ -1,6 +1,8 @@
 package calculator.team07.model.Entity;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
     public String TextMath="";
     public String ScreenMath="";
     public String Answer="";
