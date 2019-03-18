@@ -5,20 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.HistoryActivity">
+    tools:context=".view.HistoryActivity"
+    android:background="#0D0831">
 
-    <Button
-        android:layout_weight="1"
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
-        />
     <ListView
-        android:layout_weight="4"
+        android:padding="2dp"
         android:id="@+id/lv_list_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </ListView>
 </LinearLayout>
