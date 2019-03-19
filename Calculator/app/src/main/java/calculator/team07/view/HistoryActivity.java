@@ -3,6 +3,7 @@ package calculator.team07.view;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,57 +19,41 @@ import calculator.team07.R;
 import calculator.team07.adapter.CustomAdapter;
 import calculator.team07.model.Entity.Result;
 import calculator.team07.model.SubModel.CalculatorHandle;
+import calculator.team07.presenter.HistoryPresenter;
+import calculator.team07.presenter.IHistoryView;
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity implements IHistoryView {
 
+    private HistoryPresenter mHistoryPresenter;
     private List<Result> mListResult;
     private CustomAdapter mCustomAdapter;
     private ListView mListView;
     private int mPosition = -9999;
     private Result mResult;
-    private Button mBtnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        mListView = (ListView) findViewById(R.id.lv_list_result);
-        mBtnBack = (Button) findViewById(R.id.btn_back);
+        mHistoryPresenter = new HistoryPresenter(this);
 
-        initList();
+        mHistoryPresenter.getListResut();
 
-        mCustomAdapter = new CustomAdapter(HistoryActivity.this, R.layout.row_item, mListResult);
-        mListView.setAdapter(mCustomAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ShowCustomDialog(position);
-            }
-        });
-        mBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-    }
-
-    private void initList() {
-        //TODO lay tam truc tiep, test xong thi xoa
-        mListResult = CalculatorHandle.sLstAnswer;
+        //Set ActionBar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("History");
     }
 
     @Override
     public void finish() {
-
         Intent data = new Intent();
         if (this.mPosition != -9999) {
             this.mResult = mListResult.get(mPosition);
-            this.mPosition = -9999;
         } else {
             this.mResult = null;
         }
-        data.putExtra("feedback", this.mResult);
+        data.putExtra("result", this.mResult);
+        data.putExtra("index", this.mPosition);
         this.setResult(Activity.RESULT_OK, data);
         super.finish();
     }
@@ -95,9 +80,7 @@ public class HistoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mListResult.size() >= 1) {
                     HistoryActivity.this.mPosition = position;
-                    mListResult.remove(position);
-                    mCustomAdapter.notifyDataSetChanged();
-                    HistoryActivity.this.mPosition = -9999;
+                    mHistoryPresenter.deleteResult(position);
                 } else {
                     Toast.makeText(HistoryActivity.this, "Không còn phần tử nào trong lịch sử !", Toast.LENGTH_LONG).show();
                 }
@@ -112,5 +95,47 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void displayDeleteResultFailure() {
+
+    }
+
+    @Override
+    public void displayDeleteResultSuccess() {
+        //mListResult.remove(this.mPosition);
+        mCustomAdapter.notifyDataSetChanged();
+        HistoryActivity.this.mPosition = -9999;
+    }
+
+    @Override
+    public void displayListResultSuccess(List<Result> lstAnswer) {
+        mListResult = lstAnswer;
+
+        mListView = (ListView) findViewById(R.id.lv_list_result);
+        mCustomAdapter = new CustomAdapter(HistoryActivity.this, R.layout.row_item, mListResult);
+        mListView.setAdapter(mCustomAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ShowCustomDialog(position);
+            }
+        });
+    }
+
+    @Override
+    public void displayListResultFailure() {
+
+    }
+
+    @Override
+    public void displayPreviousResultSuccess(String textMath, String screenTextMath, String textAns, int index) {
+
+    }
+
+    @Override
+    public void displayPreviousResultFailure() {
+
     }
 }
