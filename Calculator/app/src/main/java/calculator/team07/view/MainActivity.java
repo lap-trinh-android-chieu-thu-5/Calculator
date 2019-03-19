@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -49,11 +48,6 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         fragmentTransaction.add(R.id.top, mExFragment);
         fragmentTransaction.add(R.id.bottom, mKeyMainFragment);
         fragmentTransaction.commit();
-
-
-        //Set ActionBar
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Calculator");
 
     }
 
@@ -288,8 +282,8 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
                         mScreenTextMath = mTextMath = "";
                         CalculatorHandle.sCheckSubmit = false;
                     }
-                    mTextMath += "0";
-                    mScreenTextMath += "0";
+                    mTextMath += "1";
+                    mScreenTextMath += "1";
                 }
                 mExFragment.setTextViewEpresion(mScreenTextMath);
                 break;
@@ -449,7 +443,7 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
                 mMainPresenter.getPreviousResult(mIndex + 1);
                 break;
             }
-            case R.id.btn_history: {
+            case  R.id.btn_history:{
                 Intent intentHistory = new Intent(this, HistoryActivity.class);
                 startActivityForResult(intentHistory, REQUEST_CODE);
                 break;
@@ -488,21 +482,9 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-            Result result = (Result) data.getSerializableExtra("result");
-            int index = (int) data.getSerializableExtra("index");
-
-            if (result != null){
-                this.mIndex = index;
-
-                mScreenTextMath = result.ScreenMath;
-                mTextMath = result.TextMath;
-                mTextAns  = result.Answer;
-                mIndex = index;
-
-                mExFragment.setTextViewEpresion(mScreenTextMath);
-                mExFragment.setTextViewAnswer(mTextAns);
-            }
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE ) {
+            Result result = (Result) data.getSerializableExtra("feedback");
+            //TODO set lai previous
         }
     }
 }

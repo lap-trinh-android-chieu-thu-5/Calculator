@@ -1,11 +1,9 @@
 package calculator.team07.presenter;
 
 public interface IMainView {
-    void displayCalculatorFailure(String msgError);
+    public void displayCalculatorFailure(String msgError);
+    public void displayCalculatorSuccess(String textAns);
 
-    void displayCalculatorSuccess(String textAns);
-
-    void displayPreviousResultFailure(String msgError);
-
-    void displayPreviousResultSuccess(String textMath, String screenTextMath, String textAns, int index);
+    public void displayPreviousResultFailure(String msgError);
+    public void displayPreviousResultSuccess(String textMath, String screenTextMath,String textAns, int index);
 }

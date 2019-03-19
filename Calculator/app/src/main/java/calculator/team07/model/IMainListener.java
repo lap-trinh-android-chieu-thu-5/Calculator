@@ -1,11 +1,9 @@
 package calculator.team07.model;
 
 public interface IMainListener {
-    void onLoadCalculatorFailure(String msgError);
+    public void onLoadCalculatorFailure(String msgError);
+    public void onLoadCalculatorSuccess(String textAns);
 
-    void onLoadCalculatorSuccess(String textAns);
-
-    void onLoadPreviousResultFailure(String msgError);
-
-    void onLoadPreviousResultSuccess(String textMath, String screenTextMath, String textAns, int index);
+    public void onLoadPreviousResultFailure(String msgError);
+    public void onLoadPreviousResultSuccess(String textMath, String screenTextMath,String textAns, int index);
 }

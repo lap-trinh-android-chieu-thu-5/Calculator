@@ -37,8 +37,8 @@ public class CustomAdapter<puclic> extends ArrayAdapter<Result> {
             convertView = LayoutInflater.from(this.mContext).inflate(R.layout.row_item, parent, false);
             viewHolder = new ViewHolder();
 
-            viewHolder.mTvExpression = (TextView) convertView.findViewById(R.id.text_view_expression);
-            viewHolder.mTvAnswer = (TextView) convertView.findViewById(R.id.text_view_answer);
+            viewHolder.mTvAnswer = (TextView) convertView.findViewById(R.id.text_view_expression);
+            viewHolder.mTvExpression = (TextView) convertView.findViewById(R.id.text_view_answer);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
