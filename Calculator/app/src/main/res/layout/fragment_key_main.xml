@@ -11,8 +11,10 @@
         android:layout_height="match_parent"
         android:stretchColumns="*">
 
-        <TableRow>
+        <TableRow
+            android:layout_weight="1">
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_ac"
                 android:layout_margin="@dimen/button_margin_size"
                 android:textSize="@dimen/button_text_size"
@@ -22,6 +24,7 @@
                 android:text="AC"/>
 
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_del"
                 android:layout_margin="@dimen/button_margin_size"
                 android:layout_span="2"
@@ -31,9 +34,11 @@
                 android:textSize="@dimen/button_text_size" />
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_weight="1">
 
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_open"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
@@ -41,18 +46,21 @@
                 android:textColor="#ffffff"
                 android:textSize="@dimen/button_text_size" />
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_close"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text=")"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_opposite"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="+/-"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_divide"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
@@ -60,8 +68,10 @@
                 android:text="/"/>
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_weight="1">
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num1"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
@@ -69,6 +79,7 @@
                 android:text="1"/>
 
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num2"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
@@ -76,12 +87,14 @@
                 android:textColor="#ffffff"
                 android:textSize="@dimen/button_text_size" />
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num3"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="3"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_multiply"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
@@ -89,52 +102,62 @@
                 android:text="*"
                 android:textAllCaps="false"/>
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_weight="1">
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num4"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="4"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num5"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="5"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num6"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="6"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_minus"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="-"/>
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_weight="1">
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num7"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="7"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num8"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="8"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num9"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="9"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_add"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
@@ -143,26 +166,31 @@
         </TableRow>
 
 
-        <TableRow>
+        <TableRow
+            android:layout_weight="1">
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_extend_key"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button_keyextend"
                 android:textSize="@dimen/button_text_size"
                 android:textColor="#48B1D1" />
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_num0"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="0"/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_dot"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button"
                 android:textSize="@dimen/button_text_size"                android:textColor="#ffffff"
                 android:text="."/>
             <Button
+                android:layout_height="match_parent"
                 android:id="@+id/btn_submit"
                 android:layout_margin="@dimen/button_margin_size"
                 android:background="@drawable/bg_button_affect"
