@@ -5,16 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.MainActivity"
-    >
+    tools:context=".view.MainActivity">
 
     <FrameLayout
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="guildline"
-        android:id="@+id/top"
+        android:id="@+id/top_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="0dp"
+        android:background="#f4e842"
+        app:layout_constraintBottom_toTopOf="@+id/guildline"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
+    </FrameLayout>
+
     <android.support.constraint.Guideline
         android:id="@+id/guildline"
         android:layout_width="wrap_content"
@@ -23,9 +29,17 @@
         app:layout_constraintGuide_percent="0.4"/>
 
     <FrameLayout
+        android:background="#b250a7"
+        android:id="@+id/bottom_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/bottom"
+        app:layout_constraintTop_toBottomOf="@+id/guildline"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp" >
+        <FrameLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
