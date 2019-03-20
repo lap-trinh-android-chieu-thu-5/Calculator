@@ -2,12 +2,14 @@ package calculator.team07.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import calculator.team07.R;
 import calculator.team07.fragment.ExpressionFragment;
@@ -21,6 +23,7 @@ import calculator.team07.presenter.MainPresenter;
 
 public class MainActivity extends AppCompatActivity implements IKeyClickListener, IMainView {
 
+    private boolean mIsLandscape = false;
     private final static int REQUEST_CODE = 200;
     private int mIndex = -1;
     private String mTextMath = "";
@@ -35,7 +38,12 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mIsLandscape = isHorizontal();
+        if (mIsLandscape == false) {
+            setContentView(R.layout.activity_main);
+        } else {
+            setContentView(R.layout.activity_main_landscape);
+        }
 
         mMainPresenter = new MainPresenter(this);
 
@@ -51,10 +59,46 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         fragmentTransaction.commit();
 
 
+        //Set lai gia tri
+        if (savedInstanceState != null && mExFragment != null) {
+
+            mIndex = savedInstanceState.getInt("mIndex");
+            mTextMath = savedInstanceState.getString("mTextMath");
+            mScreenTextMath = savedInstanceState.getString("mScreenTextMath");
+            mTextAns = savedInstanceState.getString("mTextAns");
+        }
+
         //Set ActionBar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Calculator");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mExFragment.setTextViewEpresion(mScreenTextMath);
+        mExFragment.setTextViewAnswer(mTextAns);
+    }
+
+    private boolean isHorizontal() {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        savedInstanceState.putInt("mIndex", mIndex);
+        savedInstanceState.putString("mScreenTextMath", mScreenTextMath);
+        savedInstanceState.putString("mTextMath", mTextMath);
+        savedInstanceState.putString("mTextAns", mTextAns);
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     private void submit() {
@@ -492,12 +536,12 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
             Result result = (Result) data.getSerializableExtra("result");
             int index = (int) data.getSerializableExtra("index");
 
-            if (result != null){
+            if (result != null) {
                 this.mIndex = index;
 
                 mScreenTextMath = result.ScreenMath;
                 mTextMath = result.TextMath;
-                mTextAns  = result.Answer;
+                mTextAns = result.Answer;
                 mIndex = index;
 
                 mExFragment.setTextViewEpresion(mScreenTextMath);
