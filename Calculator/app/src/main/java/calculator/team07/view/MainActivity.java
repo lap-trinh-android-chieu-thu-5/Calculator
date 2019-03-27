@@ -161,6 +161,20 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
             }
             case R.id.btn_opposite: {
                 //TODO chua viet ham cho nut nay, hoan thanh trong version tiep theo
+                if (mTextMath.length() < 48) {
+                    if (CalculatorHandle.sCheckSubmit == true) {
+                        mTextMath = mScreenTextMath = mTextAns;
+
+                        if(mScreenTextMath.charAt(0) == '-'){
+                            mScreenTextMath = mScreenTextMath.replace("-", "");
+                        }else{
+                            mScreenTextMath = "-" + mScreenTextMath;
+                        }
+                        mTextMath = mScreenTextMath;
+                        CalculatorHandle.sCheckSubmit = false;
+                        mExFragment.setTextViewEpresion(mScreenTextMath);
+                    }
+                }
                 break;
             }
             case R.id.btn_divide: {
@@ -346,7 +360,9 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
                     }
                     if (mTextMath.equals("")) {
                         mTextMath += "0";
+                        mScreenTextMath = mTextMath;
                     }
+
                     mTextMath += ".";
                     mScreenTextMath += ".";
                 }

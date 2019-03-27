@@ -27,6 +27,7 @@ public final class CalculatorHandle {
         }
 
         if (sInfixToPostfix.check_error) {
+            sInfixToPostfix.check_error = false;
             return null;
         }
         return new Result(textMath, screenTextMath, textAns);
