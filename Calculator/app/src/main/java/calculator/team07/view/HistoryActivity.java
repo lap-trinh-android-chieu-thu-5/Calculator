@@ -23,12 +23,20 @@ import calculator.team07.presenter.HistoryPresenter;
 import calculator.team07.presenter.IHistoryView;
 
 public class HistoryActivity extends AppCompatActivity implements IHistoryView {
-
+    //Tang presenter dieu khien
     private HistoryPresenter mHistoryPresenter;
+
+    //Danh sach ket qua lich su
     private List<Result> mListResult;
+
+    //Adapter cho listview
     private CustomAdapter mCustomAdapter;
+
     private ListView mListView;
+
+    //vi tri cua thanh phan duoc chon trong listview
     private int mPosition = -9999;
+
     private Result mResult;
 
     @Override
@@ -44,6 +52,8 @@ public class HistoryActivity extends AppCompatActivity implements IHistoryView {
         actionBar.setTitle("History");
     }
 
+
+    //truyen du lieu khi History Activity bi dong
     @Override
     public void finish() {
         Intent data = new Intent();
@@ -58,6 +68,7 @@ public class HistoryActivity extends AppCompatActivity implements IHistoryView {
         super.finish();
     }
 
+    //Show Dialog tuy chon khi chon tung thanh phan trong list
     public void ShowCustomDialog(final int position) {
 
         final Dialog dialog = new Dialog(this);
@@ -102,6 +113,8 @@ public class HistoryActivity extends AppCompatActivity implements IHistoryView {
 
     }
 
+
+    //Hien thi lai danh sach khi xoa thanh cong
     @Override
     public void displayDeleteResultSuccess() {
         //mListResult.remove(this.mPosition);
@@ -109,6 +122,7 @@ public class HistoryActivity extends AppCompatActivity implements IHistoryView {
         HistoryActivity.this.mPosition = -9999;
     }
 
+    //Hien thi danh sach khi lay danh sach thanh cong
     @Override
     public void displayListResultSuccess(List<Result> lstAnswer) {
         mListResult = lstAnswer;

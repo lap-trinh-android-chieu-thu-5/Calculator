@@ -23,11 +23,22 @@ import calculator.team07.presenter.MainPresenter;
 
 public class MainActivity extends AppCompatActivity implements IKeyClickListener, IMainView {
 
+    //Kiem tra man hinh xoay ngang hay doc
     private boolean mIsLandscape = false;
+
+    //request code nhan tu history
     private final static int REQUEST_CODE = 200;
+
+    //vi tri hien tai cua bieu thuc trong lich su
     private int mIndex = -1;
+
+    //chuoi de tinh toan
     private String mTextMath = "";
+
+    //chuoi ket qua de hien thi
     private String mTextAns = "0";
+
+    //chuoi bieu thuc hien thi
     private String mScreenTextMath = "";
 
     private ExpressionFragment mExFragment;
@@ -38,7 +49,10 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Kiem tra ngang doc
         mIsLandscape = isHorizontal();
+
         if (mIsLandscape == false) {
             setContentView(R.layout.activity_main);
         } else {
@@ -59,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         fragmentTransaction.commit();
 
 
-        //Set lai gia tri
+        //Set lai gia tri khi xoay man hinh
         if (savedInstanceState != null && mExFragment != null) {
 
             mIndex = savedInstanceState.getInt("mIndex");
@@ -74,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
 
     }
 
+    //set text len man hinh
     @Override
     protected void onResume() {
         super.onResume();
@@ -81,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         mExFragment.setTextViewAnswer(mTextAns);
     }
 
+    //ham kiem tra xoay ngang doc
     private boolean isHorizontal() {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -90,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         }
     }
 
+
+    //luu lai gia tri truoc khi xoay man hinh
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
 
@@ -101,10 +119,13 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         super.onSaveInstanceState(savedInstanceState);
     }
 
+    //thuc hien tinh toan
     private void submit() {
         mMainPresenter.calculate(mTextMath, mScreenTextMath, mTextAns);
     }
 
+
+    //bat cac phim duoc tra ve tu fragment thong qua IKeyClickListener
     @Override
     public void onKeyClick(int keyId) {
         int a = 0;
@@ -517,12 +538,14 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         }
     }
 
+    //hien thi khi callback tinh toan fail
     @Override
     public void displayCalculatorFailure(String msgError) {
         mTextAns = "0";
         mExFragment.setTextViewAnswer(msgError);
     }
 
+    //hien thi khi callback tinh toan thanh cong
     @Override
     public void displayCalculatorSuccess(String textAns) {
         mTextAns = textAns;
@@ -535,6 +558,8 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         return;
     }
 
+
+    //hien thi ket qua truoc do thanh cong
     @Override
     public void displayPreviousResultSuccess(String textMath, String screenTextMath, String textAns, int index) {
         mScreenTextMath = screenTextMath;
@@ -546,6 +571,7 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
         mExFragment.setTextViewAnswer(textAns);
     }
 
+    //nhan ket qua tra ve khi dong HistoryActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import calculator.team07.R;
 public class KeyMainFragment extends Fragment implements View.OnClickListener {
 
+    //Cau noi call back MainActivity
     private  IKeyClickListener mIkeyClickListener;
     private Button mBtnAc, mBtnDel, mBtnOpen, mBtnClose, mBtnOpposite, mBtnDevide, mBtnNum1, mBtnNum2, mBtnNum3,
             mBtnMutiply, mBtnNum4, mBtnNum5, mBtnNum6, mBtnMinus, mBtnNum7, mBtnNum8, mBtnNum9, mBtnAdd,
@@ -24,7 +25,6 @@ public class KeyMainFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_key_main, container, false);
-
 
         mBtnAc = (Button) view.findViewById(R.id.btn_ac);
         mBtnAc.setOnClickListener(this);
@@ -95,6 +95,7 @@ public class KeyMainFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    //Duoc goi ra khi no hien thi len MainActivity
     @Override
     public  void onAttach(Context context) {
         super.onAttach(context);
@@ -106,12 +107,14 @@ public class KeyMainFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
     }
 
+    //Bat tat ca su kien click cua button
     @Override
     public void onClick(View v) {
         int id = v.getId();
         mIkeyClickListener.onKeyClick(id);
     }
 
+    //Singleton duy tri duy nhat 1 instance
     public static Fragment newInstance() {
         KeyMainFragment myFragment = new KeyMainFragment();
         return myFragment;

@@ -20,7 +20,7 @@ public class CustomAdapter<puclic> extends ArrayAdapter<Result> {
     private int mResource;
     private List<Result> mObjects;
     private String mTag = getClass().getSimpleName();
-
+    //xac nhan cac thanh phan khoi tao, luu tru de xu dung
     public CustomAdapter(Context context, int resource, List<Result> objects) {
         super(context, resource, objects);
         this.mContext = context;

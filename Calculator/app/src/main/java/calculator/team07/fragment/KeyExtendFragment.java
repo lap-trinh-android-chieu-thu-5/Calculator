@@ -13,7 +13,9 @@ import calculator.team07.R;
 
 public class KeyExtendFragment extends Fragment implements View.OnClickListener {
 
+    //Cau noi call back MainActivity
     private  IKeyClickListener mIkeyClickListener;
+
     private Button mBtnAc, mBtnDel, mBtnSin, mBtnCos, mBtnTan, mBtnFactorial, mBtnPow, mBtnSqrt,
             mBtnPercent, mBtnPi, mBtnMainKey, mBtnSubmit, mBtnInverse;
 
@@ -66,6 +68,8 @@ public class KeyExtendFragment extends Fragment implements View.OnClickListener 
         return view;
     }
 
+
+    //Duoc goi ra khi no hien thi len MainActivity
     @Override
     public  void onAttach(Context context) {
         super.onAttach(context);
@@ -73,11 +77,15 @@ public class KeyExtendFragment extends Fragment implements View.OnClickListener 
         return;
     }
 
+
+    //Bat tat ca su kien click cua button
     @Override
     public void onClick(View view) {
         int id = view.getId();
         mIkeyClickListener.onKeyClick(id);
     }
+
+    //Singleton duy tri duy nhat 1 instance
     public static Fragment newInstance() {
         KeyExtendFragment myFragment = new KeyExtendFragment();
         return myFragment;

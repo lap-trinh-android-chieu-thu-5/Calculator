@@ -13,6 +13,7 @@ public class HistoryInteractor {
         mIHistoryListener = iHistoryListener;
     }
 
+    //Xoa ket qua trong danh sach lich su
     public  void deleteResult(int index){
         try{
             CalculatorHandle.deleteResult(index);
@@ -22,6 +23,7 @@ public class HistoryInteractor {
         }
     }
 
+    //lay ket qua tai vi tri yeu cau trong danh sach lich su
     public  void getPreviousResult(int i){
         try{
             Result result = CalculatorHandle.getPreviousResult(i);
@@ -33,6 +35,7 @@ public class HistoryInteractor {
         }
     }
 
+    //Lay toan bo danh sach lich su
     public  void getListResult(){
         List<Result> lstAnswer = CalculatorHandle.getListResult();
         mIHistoryListener.onLoadListResultSuccess(lstAnswer);
