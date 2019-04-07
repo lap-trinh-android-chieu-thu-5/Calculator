@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import calculator.team07.R;
 import calculator.team07.fragment.ExpressionFragment;
+import calculator.team07.fragment.ExpressionLandscapeFragment;
 import calculator.team07.fragment.IKeyClickListener;
 import calculator.team07.fragment.KeyExtendFragment;
 import calculator.team07.fragment.KeyMainFragment;
+import calculator.team07.fragment.KeyMainLandscapeFragment;
 import calculator.team07.model.Entity.Result;
 import calculator.team07.model.SubModel.CalculatorHandle;
 import calculator.team07.presenter.IMainView;
@@ -44,38 +46,58 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
     private ExpressionFragment mExFragment;
     private KeyMainFragment mKeyMainFragment;
     private KeyExtendFragment mKeyExFragment;
+
+    private ExpressionLandscapeFragment mExLandscapeFragment;
+    private KeyMainLandscapeFragment mKeyMainLandscapeFragment;
+
     private MainPresenter mMainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Kiem tra ngang doc
-        mIsLandscape = isHorizontal();
-
-        if (mIsLandscape == false) {
-            setContentView(R.layout.activity_main);
-        } else {
-            setContentView(R.layout.activity_main_landscape);
-        }
-
+        //Khoi tao mac dinh, luon co trong 2 man hinh
         mMainPresenter = new MainPresenter(this);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        mExFragment = new ExpressionFragment();
-        mKeyMainFragment = new KeyMainFragment();
-        mKeyExFragment = new KeyExtendFragment();
 
-        fragmentTransaction.add(R.id.top, mExFragment);
-        fragmentTransaction.add(R.id.bottom, mKeyMainFragment);
-        fragmentTransaction.commit();
+        //Kiem tra ngang doc
+        mIsLandscape = isHorizontal();
 
+        if (mIsLandscape == false) {
+
+            //set layout main
+            setContentView(R.layout.activity_main);
+
+            //khoi tao fragment phu hop
+            mExFragment = new ExpressionFragment();
+            mKeyMainFragment = new KeyMainFragment();
+            mKeyExFragment = new KeyExtendFragment();
+
+            //paste fragment len main
+            fragmentTransaction.add(R.id.top, mExFragment);
+            fragmentTransaction.add(R.id.bottom, mKeyMainFragment);
+            fragmentTransaction.commit();
+
+        } else {
+            //set layout main
+            setContentView(R.layout.activity_main_landscape);
+
+            //khoi tao fragment phu hop
+            mExFragment = new ExpressionFragment();
+            mKeyMainLandscapeFragment = new KeyMainLandscapeFragment();
+
+            //paste fragment len main
+            fragmentTransaction.add(R.id.top, mExFragment);
+            fragmentTransaction.add(R.id.bottom, mKeyMainLandscapeFragment);
+            fragmentTransaction.commit();
+        }
+
+        int b = 0;
 
         //Set lai gia tri khi xoay man hinh
-        if (savedInstanceState != null && mExFragment != null) {
-
+        if (savedInstanceState != null) {
             mIndex = savedInstanceState.getInt("mIndex");
             mTextMath = savedInstanceState.getString("mTextMath");
             mScreenTextMath = savedInstanceState.getString("mScreenTextMath");
@@ -92,8 +114,18 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
     @Override
     protected void onResume() {
         super.onResume();
-        mExFragment.setTextViewEpresion(mScreenTextMath);
-        mExFragment.setTextViewAnswer(mTextAns);
+
+        //binh thuong
+        if (mExFragment != null) {
+            mExFragment.setTextViewEpresion(mScreenTextMath);
+            mExFragment.setTextViewAnswer(mTextAns);
+        } else { //landscape
+            if (mExLandscapeFragment != null) {
+                mExLandscapeFragment.setTextViewEpresion(mScreenTextMath);
+                mExLandscapeFragment.setTextViewAnswer(mTextAns);
+            }
+        }
+
     }
 
     //ham kiem tra xoay ngang doc
@@ -134,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
                 mTextMath = "";
                 mScreenTextMath = "";
                 mTextAns = "0";
+
 
                 mExFragment.setTextViewAnswer(mTextAns);
                 mExFragment.setTextViewEpresion(mTextAns);
@@ -186,9 +219,9 @@ public class MainActivity extends AppCompatActivity implements IKeyClickListener
                     if (CalculatorHandle.sCheckSubmit == true) {
                         mTextMath = mScreenTextMath = mTextAns;
 
-                        if(mScreenTextMath.charAt(0) == '-'){
+                        if (mScreenTextMath.charAt(0) == '-') {
                             mScreenTextMath = mScreenTextMath.replace("-", "");
-                        }else{
+                        } else {
                             mScreenTextMath = "-" + mScreenTextMath;
                         }
                         mTextMath = mScreenTextMath;
