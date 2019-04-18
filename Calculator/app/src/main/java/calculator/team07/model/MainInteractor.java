@@ -12,13 +12,18 @@ public class MainInteractor {
 
     //phuong thuc tinh toan bieu thuc duoc dua xng
     public void calculate(String textMath, String screenTextMath, String textAns){
-        Result result = CalculatorHandle.caculate(textMath, screenTextMath , textAns);
-        if(result == null){
+        try{
+            Result result = CalculatorHandle.caculate(textMath, screenTextMath , textAns);
+            if(result == null){
+                mIMainListener.onLoadCalculatorFailure("Math Error !");
+            }else{
+                mIMainListener.onLoadCalculatorSuccess(result.Answer);
+                CalculatorHandle.addResultToArrayList(result);
+            }
+        }catch (Exception ex){
             mIMainListener.onLoadCalculatorFailure("Math Error !");
-        }else{
-            mIMainListener.onLoadCalculatorSuccess(result.Answer);
-            CalculatorHandle.addResultToArrayList(result);
         }
+
     }
 
     //Phuong thuc lay ket qua tai vi tri yeu cau trong danh sach

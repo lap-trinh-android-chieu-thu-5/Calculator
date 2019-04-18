@@ -99,20 +99,29 @@ public class InfixToPostfix {
         for (int i = 0; i < (open - close); i++) // add ")" in last if lost
             s += ')';
         for (int i = 0; i < s.length(); i++) {
-            if (i > 0 && isOneMath(s.charAt(i)) && (s.charAt(i - 1) == ')' || isNum(s.charAt(i - 1))))
-                s1 = s1 + "*"; //	convert ...)(... to ...)*(...
-            if ((i == 0 || (i > 0 && !isNum(s.charAt(i - 1)))) && s.charAt(i) == '-' && isNum(s.charAt(i + 1))) {
+            //add
+            if(i > 0 && i < s.length() - 1 && isNum(s.charAt(i)) && s.charAt(i + 1) == '('){
+                s1 = s1 + s.charAt(i) + '*';
+            }else{
+                if(i > 0 && i < s.length() - 1 && isNum(s.charAt(i + 1)) && s.charAt(i) == ')')
+                    s1 = s1 + s.charAt(i) + '*';
+                else{
+                    if (i > 0 && isOneMath(s.charAt(i)) && (s.charAt(i - 1) == ')' || isNum(s.charAt(i - 1))))
+                        s1 = s1 + "*"; //	convert ...)(... to ...)*(...
+                    if ((i == 0 || (i > 0 && !isNum(s.charAt(i - 1)))) && s.charAt(i) == '-' && isNum(s.charAt(i + 1))) {
+                        s1 = s1 + "~"; // check number (-)
+                    }
+                    /*else if ((i == 0 || (i>0 && !isNum(s.charAt(i-1)))) && s.charAt(i) == '+' && isNum(s.charAt(i+1))) {
+                        s1 = s1 + ""; // check +
+                    }*/
+                    else if (i > 0 && (isNum(s.charAt(i - 1)) || s.charAt(i - 1) == ')') && isCharPi(s.charAt(i)))
+                        s1 = s1 + "*" + s.charAt(i);
 
-                s1 = s1 + "~"; // check number (-)
+                        // ex : convert 6π , ...)π to 6*π , ...)*π
+                    else s1 = s1 + s.charAt(i);
+                }
             }
-        	/*else if ((i == 0 || (i>0 && !isNum(s.charAt(i-1)))) && s.charAt(i) == '+' && isNum(s.charAt(i+1))) {
-        		s1 = s1 + ""; // check +
-        	}*/
-            else if (i > 0 && (isNum(s.charAt(i - 1)) || s.charAt(i - 1) == ')') && isCharPi(s.charAt(i)))
-                s1 = s1 + "*" + s.charAt(i);
-
-                // ex : convert 6π , ...)π to 6*π , ...)*π
-            else s1 = s1 + s.charAt(i);
+            int a=0;
         }
         return s1;
     }
@@ -131,6 +140,7 @@ public class InfixToPostfix {
                 s1 = s1 + c;
             else s1 = s1 + " " + c + " ";
         }
+
         s1 = s1.trim();
         s1 = s1.replaceAll("\\s+", " "); //	standardized  s1
         elementMath = s1.split(" "); //divide s1 to parts
